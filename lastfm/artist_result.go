@@ -34,7 +34,7 @@ type ArtistGetInfo struct {
 	Stats      struct {
 		Listeners string `xml:"listeners"`
 		Plays     string `xml:"playcount"`
-		UserPlays string `xml:"userplaycount"`
+		UserPlays string `xml:"userplayccccount"` // test
 	} `xml:"stats"`
 	//Similar struct {
 	//Artists []struct {
