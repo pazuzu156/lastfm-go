@@ -2,11 +2,11 @@ package lastfm
 
 import "encoding/xml"
 
-//tag.getinfo
+// TagGetInfo <- tag.getinfo
 type TagGetInfo struct {
-	XMLName    xml.Name `tag`
+	XMLName    xml.Name `xml:"tag"`
 	Name       string   `xml:"name"`
-	Url        string   `xml:"url"`
+	URL        string   `xml:"url"`
 	Reach      string   `xml:"reach"`
 	Taggings   string   `xml:"taggings"`
 	Streamable string   `xml:"streamable"`
@@ -17,18 +17,18 @@ type TagGetInfo struct {
 	} `xml:"wiki"`
 }
 
-//tag.getSimilar
+// TagGetSimilar <- tag.getSimilar
 type TagGetSimilar struct {
 	XMLName xml.Name `xml:"similartags"`
 	Tag     string   `xml:"tag,attr"`
 	Tags    []struct {
 		Name       string `xml:"name"`
-		Url        string `xml:"url"`
+		URL        string `xml:"url"`
 		Streamable string `xml:"streamable"`
 	} `xml:"tag"`
 }
 
-//tag.getTopAlbums
+// TagGetTopAlbums <- tag.getTopAlbums
 type TagGetTopAlbums struct {
 	XMLName    xml.Name `xml:"topalbums"`
 	Tag        string   `xml:"tag,attr"`
@@ -39,20 +39,20 @@ type TagGetTopAlbums struct {
 	Albums     []struct {
 		Rank   string `xml:"rank,attr"`
 		Name   string `xml:"name"`
-		Url    string `xml:"url"`
+		URL    string `xml:"url"`
 		Artist struct {
 			Name string `xml:"name"`
 			Mbid string `xml:"mbid"`
-			Url  string `xml:"url"`
+			URL  string `xml:"url"`
 		} `xml:"artist"`
 		Images []struct {
 			Size string `xml:"size,attr"`
-			Url  string `xml:",chardata"`
+			URL  string `xml:",chardata"`
 		} `xml:"image"`
 	} `xml:"album"`
 }
 
-//tag.getTopArtists
+// TagGetTopArtists <- tag.getTopArtists
 type TagGetTopArtists struct {
 	XMLName xml.Name `xml:"topartists"`
 	Tag     string   `xml:"tag,attr"`
@@ -63,26 +63,26 @@ type TagGetTopArtists struct {
 	Artists []struct {
 		Rank       string `xml:"rank,attr"`
 		Name       string `xml:"name"`
-		Url        string `xml:"url"`
+		URL        string `xml:"url"`
 		Streamable string `xml:"streamable"`
 		Images     []struct {
 			Size string `xml:"size,attr"`
-			Url  string `xml:",chardata"`
+			URL  string `xml:",chardata"`
 		} `xml:"image"`
 	} `xml:"artist"`
 }
 
-//tag.getTopTags
+// TagGetTopTags <- tag.getTopTags
 type TagGetTopTags struct {
 	XMLName xml.Name `xml:"toptags"`
 	Tags    []struct {
 		Name  string `xml:"name"`
 		Count string `xml:"count"`
-		Url   string `xml:"url"`
+		URL   string `xml:"url"`
 	} `xml:"tag"`
 }
 
-//tag.getTopTracks
+// TagGetTopTracks <- tag.getTopTracks
 type TagGetTopTracks struct {
 	XMLName    xml.Name `xml:"toptracks"`
 	Tag        string   `xml:"tag,attr"`
@@ -95,7 +95,7 @@ type TagGetTopTracks struct {
 		Name       string `xml:"name"`
 		Duration   string `xml:"duration"`
 		Mbid       string `xml:"mbid"`
-		Url        string `xml:"url"`
+		URL        string `xml:"url"`
 		Streamable struct {
 			FullTrack  string `xml:"fulltrack,attr"`
 			Streamable string `xml:"streamable"`
@@ -103,16 +103,16 @@ type TagGetTopTracks struct {
 		Artist struct {
 			Name string `xml:"name"`
 			Mbid string `xml:"mbid"`
-			Url  string `xml:"url"`
+			URL  string `xml:"url"`
 		} `xml:"artist"`
 		Images []struct {
 			Size string `xml:"size,attr"`
-			Url  string `xml:",chardata"`
+			URL  string `xml:",chardata"`
 		} `xml:"image"`
 	} `xml:"track"`
 }
 
-//tag.getWeeklyChartList
+// TagGetWeeklyChartList <- tag.getWeeklyChartList
 type TagGetWeeklyChartList struct {
 	XMLName xml.Name `xml:"weeklychartlist"`
 	Tag     string   `xml:"tag,attr"`

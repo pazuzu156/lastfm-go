@@ -4,18 +4,18 @@ import "encoding/xml"
 
 //album.addTags (empty)
 
-//album.getInfo
+// AlbumGetInfo <- album.getInfo
 type AlbumGetInfo struct {
 	XMLName     xml.Name `xml:"album"`
 	Name        string   `xml:"name"`
 	Artist      string   `xml:"artist"`
-	Id          string   `xml:"id"`
+	ID          string   `xml:"id"`
 	Mbid        string   `xml:"mbid"`
-	Url         string   `xml:"url"`
+	URL         string   `xml:"url"`
 	ReleaseDate string   `xml:"releasedate"`
 	Images      []struct {
 		Size string `xml:"size,attr"`
-		Url  string `xml:",chardata"`
+		URL  string `xml:",chardata"`
 	} `xml:"image"`
 	Listeners     string `xml:"listeners"`
 	PlayCount     string `xml:"playcount"`
@@ -25,7 +25,7 @@ type AlbumGetInfo struct {
 		Name       string `xml:"name"`
 		Duration   string `xml:"duration"`
 		Mbid       string `xml:"Mbid"`
-		Url        string `xml:"url"`
+		URL        string `xml:"url"`
 		Streamable struct {
 			FullTrack  string `xml:"fulltrack,attr"`
 			Streamable string `xml:"streamable"`
@@ -33,12 +33,12 @@ type AlbumGetInfo struct {
 		Artist struct {
 			Name string `xml:"name"`
 			Mbid string `xml:"mbid"`
-			Url  string `xml:"url"`
+			URL  string `xml:"url"`
 		} `xml:"artist"`
 	} `xml:"tracks>track"`
 	TopTags []struct {
 		Name string `xml:"name"`
-		Url  string `xml:"url"`
+		URL  string `xml:"url"`
 	} `xml:"toptags>tag"`
 	Wiki struct {
 		Published string `xml:"published"`
@@ -47,18 +47,18 @@ type AlbumGetInfo struct {
 	} `xml:"wiki"`
 }
 
-//album.getTags
+// AlbumGetTags <- album.getTags
 type AlbumGetTags struct {
 	XMLName xml.Name `xml:"tags"`
 	Artist  string   `xml:"artist,attr"`
 	Album   string   `xml:"album,attr"`
 	Tags    []struct {
 		Name string `xml:"name"`
-		Url  string `xml:"url"`
+		URL  string `xml:"url"`
 	} `xml:"tag"`
 }
 
-//album.getTopTags
+// AlbumGetTopTags <- album.getTopTags
 type AlbumGetTopTags struct {
 	XMLName xml.Name `xml:"toptags"`
 	Aritist string   `xml:"artist,attr"`
@@ -66,13 +66,13 @@ type AlbumGetTopTags struct {
 	Tags    []struct {
 		Name  string `xml:"name"`
 		Count string `xml:"count"`
-		Url   string `xml:"url"`
+		URL   string `xml:"url"`
 	} `xml:"tag"`
 }
 
 //album.removeTag (empty)
 
-//album.search
+// AlbumSearch <- album.search
 type AlbumSearch struct {
 	XMLName    xml.Name `xml:"results"`
 	OpenSearch string   `xml:"opensearch,attr"`
@@ -88,11 +88,11 @@ type AlbumSearch struct {
 	AlbumMatches []struct {
 		Name   string `xml:"name"`
 		Artist string `xml:"artist"`
-		Id     string `xml:"id"`
-		Url    string `xml:"url"`
+		ID     string `xml:"id"`
+		URL    string `xml:"url"`
 		Images []struct {
 			Size string `xml:"size,attr"`
-			Url  string `xml:",chardata"`
+			URL  string `xml:",chardata"`
 		} `xml:"image"`
 		Streamable string `xml:"streamable"`
 		Mbid       string `xml:"mbid"`

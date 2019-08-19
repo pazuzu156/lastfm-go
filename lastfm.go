@@ -1,23 +1,30 @@
 package lastfm
 
 const (
-	UriApiSecBase  = "https://ws.audioscrobbler.com/2.0/"
-	UriApiBase     = "http://ws.audioscrobbler.com/2.0/"
-	UriBrowserBase = "https://www.last.fm/api/auth/"
+	// URIAPISecBase base api uri (secured)
+	URIAPISecBase = "https://ws.audioscrobbler.com/2.0/"
+
+	// URIAPIBase base api uri
+	URIAPIBase = "http://ws.audioscrobbler.com/2.0/"
+
+	// URIBrowserBase base browser api uri
+	URIBrowserBase = "https://www.last.fm/api/auth/"
 )
 
+// P is used for adding parameters to API method calls.
 type P map[string]interface{}
 
-type Api struct {
-	params      *apiParams
-	Album       *albumApi
-	Artist      *artistApi
-	Chart       *chartApi
-	Geo         *geoApi
-	Library     *libraryApi
-	Tag         *tagApi
-	Track       *trackApi
-	User        *userApi
+// API is the base Last.fm API struct for each endpoint.
+type API struct {
+	params  *apiParams
+	Album   *albumAPI
+	Artist  *artistAPI
+	Chart   *chartAPI
+	Geo     *getAPI
+	Library *libraryAPI
+	Tag     *tagAPI
+	Track   *trackAPI
+	User    *userAPI
 }
 
 type apiParams struct {
@@ -27,31 +34,35 @@ type apiParams struct {
 	useragent string
 }
 
-func New(key, secret string) (api *Api) {
+// New creates a new Last.fm API instance.
+func New(key, secret string) (api *API) {
 	params := apiParams{key, secret, "", ""}
-	api = &Api{
-		params:      &params,
-		Album:       &albumApi{&params},
-		Artist:      &artistApi{&params},
-		Chart:       &chartApi{&params},
-		Geo:         &geoApi{&params},
-		Library:     &libraryApi{&params},
-		Tag:         &tagApi{&params},
-		Track:       &trackApi{&params},
-		User:        &userApi{&params},
+	api = &API{
+		params:  &params,
+		Album:   &albumAPI{&params},
+		Artist:  &artistAPI{&params},
+		Chart:   &chartAPI{&params},
+		Geo:     &getAPI{&params},
+		Library: &libraryAPI{&params},
+		Tag:     &tagAPI{&params},
+		Track:   &trackAPI{&params},
+		User:    &userAPI{&params},
 	}
 	return
 }
 
-func (api *Api) SetSession(sessionkey string) {
+// SetSession sets API session key
+func (api *API) SetSession(sessionkey string) {
 	api.params.sk = sessionkey
 }
 
-func (api Api) GetSessionKey() (sk string) {
+// GetSessionKey returns API session key
+func (api API) GetSessionKey() (sk string) {
 	sk = api.params.sk
 	return
 }
 
-func (api *Api) SetUserAgent(useragent string) {
+// SetUserAgent sets user agent for API calls
+func (api *API) SetUserAgent(useragent string) {
 	api.params.useragent = useragent
 }

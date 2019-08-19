@@ -2,7 +2,7 @@ package lastfm
 
 import "encoding/xml"
 
-//chart.getTopArtists
+// ChartGetTopArtists <- chart.getTopArtists
 type ChartGetTopArtists struct {
 	XMLName    xml.Name `xml:"artists"`
 	Total      int      `xml:"total,attr"`
@@ -14,16 +14,16 @@ type ChartGetTopArtists struct {
 		PlayCount  string `xml:"playcount"`
 		Listeners  string `xml:"listeners"`
 		Mbid       string `xml:"mbid"`
-		Url        string `xml:"url"`
+		URL        string `xml:"url"`
 		Streamable string `xml:"streamable"`
 		Images     []struct {
 			Size string `xml:"size,attr"`
-			Url  string `xml:",chardata"`
+			URL  string `xml:",chardata"`
 		} `xml:"image"`
 	} `xml:"artist"`
 }
 
-//chart.getTopTags
+// ChartGetTopTags <- chart.getTopTags
 type ChartGetTopTags struct {
 	XMLName    xml.Name `xml:"tags"`
 	Total      int      `xml:"total,attr"`
@@ -32,7 +32,7 @@ type ChartGetTopTags struct {
 	TotalPages int      `xml:"totalPages,attr"`
 	Tags       []struct {
 		Name       string `xml:"name"`
-		Url        string `xml:"url"`
+		URL        string `xml:"url"`
 		Reach      string `xml:"reach"`
 		Taggings   string `xml:"taggings"`
 		Streamable string `xml:"streamable"`
@@ -44,7 +44,7 @@ type ChartGetTopTags struct {
 	} `xml:"tag"`
 }
 
-//chart.getTopTracks
+// ChartGetTopTracks <- chart.getTopTracks
 type ChartGetTopTracks struct {
 	XMLName    xml.Name `xml:"tracks"`
 	Total      int      `xml:"total,attr"`
@@ -57,7 +57,7 @@ type ChartGetTopTracks struct {
 		PlayCount  string `xml:"playcount"`
 		Listeners  string `xml:"listeners"`
 		Mbid       string `xml:"mbid"`
-		Url        string `xml:"url"`
+		URL        string `xml:"url"`
 		Streamable struct {
 			FullTrack  string `xml:"fulltrack,attr"`
 			Streamable string `xml:",chardata"`
@@ -65,11 +65,11 @@ type ChartGetTopTracks struct {
 		Artist struct {
 			Name string `xml:"name"`
 			Mbid string `xml:"mbid"`
-			Url  string `xml:"url"`
+			URL  string `xml:"url"`
 		} `xml:"artist"`
 		Images []struct {
 			Size string `xml:"size,attr"`
-			Url  string `xml:",chardata"`
+			URL  string `xml:",chardata"`
 		} `xml:"image"`
 	} `xml:"track"`
 }

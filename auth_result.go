@@ -4,17 +4,17 @@ package lastfm
 // auth.x //
 ////////////
 
-//auth.getMobileSession
+// AuthGetMobileSession <- auth.getMobileSession
 type AuthGetMobileSession struct {
 	Name       string `xml:"name"` //username
 	Key        string `xml:"key"`  //session key
 	Subscriber bool   `xml:"subscriber"`
 }
 
-//auth.getToken
+// AuthGetToken <- auth.getToken
 type AuthGetToken struct {
 	Token string `xml:",chardata"`
 }
 
-//auth.getSession
+// AuthGetSession <- auth.getSession
 type AuthGetSession AuthGetMobileSession

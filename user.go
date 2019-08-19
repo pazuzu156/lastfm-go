@@ -1,11 +1,11 @@
 package lastfm
 
-type userApi struct {
+type userAPI struct {
 	params *apiParams
 }
 
 //user.getArtistTracks
-func (api userApi) GetArtistTracks(args map[string]interface{}) (result UserGetArtistTracks, err error) {
+func (api userAPI) GetArtistTracks(args map[string]interface{}) (result UserGetArtistTracks, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetArtistTracks") }()
 	err = callGet("user.getartisttracks", api.params, args, &result, P{
 		"plain": []string{"user", "artist", "startTimeStamp", "page", "endTimeStamp"},
@@ -14,7 +14,7 @@ func (api userApi) GetArtistTracks(args map[string]interface{}) (result UserGetA
 }
 
 //user.getFriends
-func (api userApi) GetFriends(args map[string]interface{}) (result UserGetFriends, err error) {
+func (api userAPI) GetFriends(args map[string]interface{}) (result UserGetFriends, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetFriends") }()
 	err = callGet("user.getfriends", api.params, args, &result, P{
 		"plain": []string{"user", "recenttracks", "limit", "page"},
@@ -23,7 +23,7 @@ func (api userApi) GetFriends(args map[string]interface{}) (result UserGetFriend
 }
 
 //user.getInfo
-func (api userApi) GetInfo(args map[string]interface{}) (result UserGetInfo, err error) {
+func (api userAPI) GetInfo(args map[string]interface{}) (result UserGetInfo, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetInfo") }()
 	if _, ok := args["user"]; !ok && api.params.sk != "" {
 		err = callPost("user.getinfo", api.params, args, &result, P{})
@@ -36,7 +36,7 @@ func (api userApi) GetInfo(args map[string]interface{}) (result UserGetInfo, err
 }
 
 //user.getLovedTracks
-func (api userApi) GetLovedTracks(args map[string]interface{}) (result UserGetLovedTracks, err error) {
+func (api userAPI) GetLovedTracks(args map[string]interface{}) (result UserGetLovedTracks, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetLovedTracks") }()
 	err = callGet("user.getlovedtracks", api.params, args, &result, P{
 		"plain": []string{"user", "limit", "page"},
@@ -45,7 +45,7 @@ func (api userApi) GetLovedTracks(args map[string]interface{}) (result UserGetLo
 }
 
 //user.getPersonalTags
-func (api userApi) GetPersonalTags(args map[string]interface{}) (result UserGetPersonalTags, err error) {
+func (api userAPI) GetPersonalTags(args map[string]interface{}) (result UserGetPersonalTags, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetPersonalTags") }()
 	err = callGet("user.getPersonalTags", api.params, args, &result, P{
 		"plain": []string{"user", "tag", "taggingtype", "limit", "page"},
@@ -54,7 +54,7 @@ func (api userApi) GetPersonalTags(args map[string]interface{}) (result UserGetP
 }
 
 //user.getRecentTracks
-func (api userApi) GetRecentTracks(args map[string]interface{}) (result UserGetRecentTracks, err error) {
+func (api userAPI) GetRecentTracks(args map[string]interface{}) (result UserGetRecentTracks, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetRecentTracks") }()
 	err = callGet("user.getrecenttracks", api.params, args, &result, P{
 		"plain": []string{"user", "limit", "page", "from", "extended", "to"},
@@ -63,7 +63,7 @@ func (api userApi) GetRecentTracks(args map[string]interface{}) (result UserGetR
 }
 
 //user.getTopAlbums
-func (api userApi) GetTopAlbums(args map[string]interface{}) (result UserGetTopAlbums, err error) {
+func (api userAPI) GetTopAlbums(args map[string]interface{}) (result UserGetTopAlbums, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetTopAlbums") }()
 	err = callGet("user.gettopalbums", api.params, args, &result, P{
 		"plain": []string{"user", "period", "limit", "page"},
@@ -72,7 +72,7 @@ func (api userApi) GetTopAlbums(args map[string]interface{}) (result UserGetTopA
 }
 
 //user.getTopArtists
-func (api userApi) GetTopArtists(args map[string]interface{}) (result UserGetTopArtists, err error) {
+func (api userAPI) GetTopArtists(args map[string]interface{}) (result UserGetTopArtists, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetTopArtists") }()
 	err = callGet("user.gettopartists", api.params, args, &result, P{
 		"plain": []string{"user", "period", "limit", "page"},
@@ -81,7 +81,7 @@ func (api userApi) GetTopArtists(args map[string]interface{}) (result UserGetTop
 }
 
 //user.getTopTags
-func (api userApi) GetTopTags(args map[string]interface{}) (result UserGetTopTags, err error) {
+func (api userAPI) GetTopTags(args map[string]interface{}) (result UserGetTopTags, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetTopTags") }()
 	err = callGet("user.gettoptags", api.params, args, &result, P{
 		"plain": []string{"user", "limit"},
@@ -90,7 +90,7 @@ func (api userApi) GetTopTags(args map[string]interface{}) (result UserGetTopTag
 }
 
 //user.getTopTracks
-func (api userApi) GetTopTracks(args map[string]interface{}) (result UserGetTopTracks, err error) {
+func (api userAPI) GetTopTracks(args map[string]interface{}) (result UserGetTopTracks, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetTopTracks") }()
 	err = callGet("user.gettoptracks", api.params, args, &result, P{
 		"plain": []string{"user", "period", "limit", "page"},
@@ -99,7 +99,7 @@ func (api userApi) GetTopTracks(args map[string]interface{}) (result UserGetTopT
 }
 
 //user.getWeeklyAlbumChart
-func (api userApi) GetWeeklyAlbumChart(args map[string]interface{}) (result UserGetWeeklyAlbumChart, err error) {
+func (api userAPI) GetWeeklyAlbumChart(args map[string]interface{}) (result UserGetWeeklyAlbumChart, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetWeeklyAlbumChart") }()
 	err = callGet("user.getweeklyalbumchart", api.params, args, &result, P{
 		"plain": []string{"user", "from", "to"},
@@ -108,7 +108,7 @@ func (api userApi) GetWeeklyAlbumChart(args map[string]interface{}) (result User
 }
 
 //user.getWeeklyArtistChart
-func (api userApi) GetWeeklyArtistChart(args map[string]interface{}) (result UserGetWeeklyArtistChart, err error) {
+func (api userAPI) GetWeeklyArtistChart(args map[string]interface{}) (result UserGetWeeklyArtistChart, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetWeeklyArtistChart") }()
 	err = callGet("user.getweeklyartistchart", api.params, args, &result, P{
 		"plain": []string{"user", "from", "to"},
@@ -117,7 +117,7 @@ func (api userApi) GetWeeklyArtistChart(args map[string]interface{}) (result Use
 }
 
 //user.getWeeklyChartList
-func (api userApi) GetWeeklyChartList(args map[string]interface{}) (result UserGetWeeklyChartList, err error) {
+func (api userAPI) GetWeeklyChartList(args map[string]interface{}) (result UserGetWeeklyChartList, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetWeeklyChartList") }()
 	err = callGet("user.getweeklychartlist", api.params, args, &result, P{
 		"plain": []string{"user"},
@@ -126,7 +126,7 @@ func (api userApi) GetWeeklyChartList(args map[string]interface{}) (result UserG
 }
 
 //user.getWeeklyTrackChart
-func (api userApi) GetWeeklyTrackChart(args map[string]interface{}) (result UserGetWeeklyTrackChart, err error) {
+func (api userAPI) GetWeeklyTrackChart(args map[string]interface{}) (result UserGetWeeklyTrackChart, err error) {
 	defer func() { appendCaller(err, "lastfm.User.GetWeeklyTrackChart") }()
 	err = callGet("user.getweeklytrackchart", api.params, args, &result, P{
 		"plain": []string{"user", "from", "to"},

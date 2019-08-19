@@ -4,8 +4,8 @@ import (
 	"net/url"
 )
 
-//Mobile app style
-func (api *Api) Login(username, password string) (err error) {
+// Login : Mobile app style.
+func (api *API) Login(username, password string) (err error) {
 	defer func() { appendCaller(err, "lastfm.Login") }()
 
 	var result AuthGetMobileSession
@@ -20,8 +20,8 @@ func (api *Api) Login(username, password string) (err error) {
 	return
 }
 
-//Desktop app style
-func (api Api) GetToken() (token string, err error) {
+// GetToken : Desktop app style.
+func (api API) GetToken() (token string, err error) {
 	defer func() { appendCaller(err, "lastfm.GetToken") }()
 
 	var result AuthGetToken
@@ -32,27 +32,28 @@ func (api Api) GetToken() (token string, err error) {
 	return
 }
 
-func (api Api) GetAuthTokenUrl(token string) (uri string) {
+// GetAuthTokenURL returns auth token url.
+func (api API) GetAuthTokenURL(token string) (uri string) {
 	urlParams := url.Values{}
 	urlParams.Add("api_key", api.params.apikey)
 	urlParams.Add("token", token)
-	uri = constructUrl(UriBrowserBase, urlParams)
+	uri = constructURL(URIBrowserBase, urlParams)
 	return
 }
 
-//Web app style
-func (api Api) GetAuthRequestUrl(callback string) (uri string) {
+// GetAuthRequestURL : Web app style
+func (api API) GetAuthRequestURL(callback string) (uri string) {
 	urlParams := url.Values{}
 	urlParams.Add("api_key", api.params.apikey)
 	if callback != "" {
 		urlParams.Add("cb", callback)
 	}
-	uri = constructUrl(UriBrowserBase, urlParams)
+	uri = constructURL(URIBrowserBase, urlParams)
 	return
 }
 
-//Desktop and Web app style
-func (api *Api) LoginWithToken(token string) (err error) {
+// LoginWithToken : Desktop and Web app style
+func (api *API) LoginWithToken(token string) (err error) {
 	defer func() { appendCaller(err, "lastfm.LoginWithToken") }()
 
 	var result AuthGetSession

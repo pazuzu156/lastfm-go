@@ -43,7 +43,7 @@ func checkRequiredParams(params P, required ...string) (err error) {
 }
 */
 
-func constructUrl(base string, params url.Values) (uri string) {
+func constructURL(base string, params url.Values) (uri string) {
 	//if ResponseFormat == "json" {
 	//params.Add("format", ResponseFormat)
 	//}
@@ -79,13 +79,13 @@ func parseResponse(body []byte, result interface{}) (err error) {
 	if err != nil {
 		return
 	}
-	if base.Status == ApiResponseStatusFailed {
-		var errorDetail ApiError
+	if base.Status == APIResponseStatusFailed {
+		var errorDetail APIError
 		err = xml.Unmarshal(base.Inner, &errorDetail)
 		if err != nil {
 			return
 		}
-		err = newApiError(&errorDetail)
+		err = newAPIError(&errorDetail)
 		return
 	} else if result == nil {
 		return
@@ -227,7 +227,7 @@ func callGet(apiMethod string, params *apiParams, args map[string]interface{}, r
 		urlParams.Add(k, v)
 	}
 
-	uri := constructUrl(UriApiSecBase, urlParams)
+	uri := constructURL(URIAPISecBase, urlParams)
 
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", uri, nil)
@@ -263,7 +263,7 @@ func callPost(apiMethod string, params *apiParams, args P, result interface{}, r
 	}
 
 	urlParams := url.Values{}
-	uri := constructUrl(UriApiSecBase, urlParams)
+	uri := constructURL(URIAPISecBase, urlParams)
 
 	//post data
 	postData := url.Values{}
@@ -310,7 +310,7 @@ func callPost(apiMethod string, params *apiParams, args P, result interface{}, r
 
 func callPostWithoutSession(apiMethod string, params *apiParams, args P, result interface{}, rules P) (err error) {
 	urlParams := url.Values{}
-	uri := constructUrl(UriApiSecBase, urlParams)
+	uri := constructURL(URIAPISecBase, urlParams)
 
 	//post data
 	postData := url.Values{}

@@ -7,42 +7,53 @@ import (
 )
 
 const (
-	ApiResponseStatusOk     = "ok"
-	ApiResponseStatusFailed = "failed"
+	// APIResponseStatusOk represents an OK status.
+	APIResponseStatusOk = "ok"
+
+	// APIResponseStatusFailed represents a FAILED status.
+	APIResponseStatusFailed = "failed"
 )
 
 const (
-	ErrorAuthRequired          = 50
-	ErrorParameterMissing      = 51
+	// ErrorAuthRequired represents an auth required error code.
+	ErrorAuthRequired = 50
+
+	// ErrorParameterMissing represents a missing parameter error code.
+	ErrorParameterMissing = 51
+
+	// ErrorInvalidTypeOfArgument represents an invalid agument type error code.
 	ErrorInvalidTypeOfArgument = 52
 )
 
+// Messages contains API error messages
 var Messages = map[int]string{
 	50: "This method requires authentication.",
 	51: "Required parameter missing. Required: %v, Missing: %v.",
 	52: "Invalid type of argument passed. Supported types are int, string and []string.",
 }
 
-type LastfmError struct {
+// Error is an API error struct.
+type Error struct {
 	Code    int
 	Message string
 	Where   string
 	Caller  string
 }
 
-func (e *LastfmError) Error() string {
+// Error returns an error string with code.
+func (e *Error) Error() string {
 	return fmt.Sprintf("LastfmError[%d]: %s (%s)", e.Code, e.Message, e.Caller)
 }
 
-func newApiError(errorXml *ApiError) (e *LastfmError) {
-	e = new(LastfmError)
-	e.Code = errorXml.Code
-	e.Message = strings.TrimSpace(errorXml.Message)
+func newAPIError(errorXML *APIError) (e *Error) {
+	e = new(Error)
+	e.Code = errorXML.Code
+	e.Message = strings.TrimSpace(errorXML.Message)
 	return e
 }
 
-func newLibError(code int, message string) (e *LastfmError) {
-	e = new(LastfmError)
+func newLibError(code int, message string) (e *Error) {
+	e = new(Error)
 	e.Code = code
 	e.Message = message
 	return e
@@ -50,6 +61,6 @@ func newLibError(code int, message string) (e *LastfmError) {
 
 func appendCaller(err error, caller string) {
 	if err != nil && reflect.TypeOf(err).String() == "*lastfm.LastfmError" {
-		err.(*LastfmError).Caller = caller
+		err.(*Error).Caller = caller
 	}
 }

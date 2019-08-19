@@ -4,7 +4,7 @@ import "encoding/xml"
 
 //track.addTags (empty)
 
-//track.getCorrection
+// TrackGetCorrection track.getCorrection
 type TrackGetCorrection struct {
 	XMLName    xml.Name `xml:"corrections"`
 	Correction struct {
@@ -14,23 +14,23 @@ type TrackGetCorrection struct {
 		Track           struct {
 			Name   string `xml:"name"`
 			Mbid   string `xml:"mbid"`
-			Url    string `xml:"url"`
+			URL    string `xml:"url"`
 			Artist struct {
 				Name string `xml:"name"`
 				Mbid string `xml:"mbid"`
-				Url  string `xml:"url"`
+				URL  string `xml:"url"`
 			} `xml:"artist"`
 		} `xml:"track"`
 	} `xml:"correction"`
 }
 
-//track.getInfo
+// TrackGetInfo <- track.getInfo
 type TrackGetInfo struct {
 	XMLName    xml.Name `xml:"track"`
-	Id         string   `xml:"id"`
+	ID         string   `xml:"id"`
 	Name       string   `xml:"name"`
 	Mbid       string   `xml:"mbid"`
-	Url        string   `xml:"url"`
+	URL        string   `xml:"url"`
 	Duration   string   `xml:"duration"`
 	Streamable struct {
 		FullTrack  string `xml:"fulltrack,attr"`
@@ -42,22 +42,22 @@ type TrackGetInfo struct {
 	Artist        struct {
 		Name string `xml:"name"`
 		Mbid string `xml:"mbid"`
-		Url  string `xml:"url"`
+		URL  string `xml:"url"`
 	} `xml:"artist"`
 	Album struct {
 		Position string `xml:"position,attr"`
 		Artist   string `xml:"artist"`
 		Title    string `xml:"title"`
 		Mbid     string `xml:"mbid"`
-		Url      string `xml:"url"`
+		URL      string `xml:"url"`
 		Images   []struct {
 			Size string `xml:"size,attr"`
-			Url  string `xml:",chardata"`
+			URL  string `xml:",chardata"`
 		} `xml:"image"`
 	} `xml:"album"`
 	TopTags []struct {
 		Name string `xml:"name"`
-		Url  string `xml:"url"`
+		URL  string `xml:"url"`
 	} `xml:"toptags>tag"`
 	Wiki struct {
 		Published string `xml:"published"`
@@ -66,7 +66,7 @@ type TrackGetInfo struct {
 	} `xml:"wiki"`
 }
 
-//track.getSimilar
+// TrackGetSimilar <- track.getSimilar
 type TrackGetSimilar struct {
 	XMLName xml.Name `xml:"similartracks"`
 	Track   string   `xml:"track,attr"`
@@ -76,7 +76,7 @@ type TrackGetSimilar struct {
 		PlayCount  string `xml:"playcount"`
 		Mbid       string `xml:"mbid"`
 		Match      string `xml:"match"`
-		Url        string `xml:"url"`
+		URL        string `xml:"url"`
 		Streamable struct {
 			FullTrack  string `xml:"fulltrack,attr"`
 			Streamable string `xml:",chardata"`
@@ -85,27 +85,27 @@ type TrackGetSimilar struct {
 		Artist   struct {
 			Name string `xml:"name"`
 			Mbid string `xml:"mbid"`
-			Url  string `xml:"url"`
+			URL  string `xml:"url"`
 		} `xml:"artist"`
 		Images []struct {
 			Size string `xml:"size,attr"`
-			Url  string `xml:",chardata"`
+			URL  string `xml:",chardata"`
 		} `xml:"image"`
 	} `xml:"track"`
 }
 
-//track.getTags
+// TrackGetTags <- track.getTags
 type TrackGetTags struct {
 	XMLName xml.Name `xml:"tags"`
 	Artist  string   `xml:"artist,attr"`
 	Track   string   `xml:"track,attr"`
 	Tags    []struct {
 		Name string `xml:"name"`
-		Url  string `xml:"url"`
+		URL  string `xml:"url"`
 	} `xml:"tag"`
 }
 
-//track.getTopTags
+// TrackGetTopTags <- track.getTopTags
 type TrackGetTopTags struct {
 	XMLName xml.Name `xml:"toptags"`
 	Artist  string   `xml:"artist,attr"`
@@ -113,7 +113,7 @@ type TrackGetTopTags struct {
 	Tags    []struct {
 		Name  string `xml:"name"`
 		Count string `xml:"count"`
-		Url   string `xml:"url"`
+		URL   string `xml:"url"`
 	} `xml:"tag"`
 }
 
@@ -121,7 +121,7 @@ type TrackGetTopTags struct {
 
 //track.removeTag (empty)
 
-//track.scrobble
+// TrackScrobble <- track.scrobble
 type TrackScrobble struct {
 	XMLName   xml.Name `xml:"scrobbles"`
 	Accepted  string   `xml:"accepted,attr"`
@@ -151,7 +151,7 @@ type TrackScrobble struct {
 	} `xml:"scrobble"`
 }
 
-//track.search
+// TrackSearch <- track.search
 type TrackSearch struct {
 	XMLName    xml.Name `xml:"results"`
 	OpenSearch string   `xml:"opensearch,attr"`
@@ -168,7 +168,7 @@ type TrackSearch struct {
 		Name       string `xml:"name"`
 		Mbid       string `xml:"mbid"`
 		Artist     string `xml:"artist"`
-		Url        string `xml:"url"`
+		URL        string `xml:"url"`
 		Streamable struct {
 			FullTrack  string `xml:"fulltrack,attr"`
 			Streamable string `xml:"streamable"`
@@ -176,14 +176,14 @@ type TrackSearch struct {
 		Listeners string `xml:"listeners"`
 		Images    []struct {
 			Size string `xml:"size,attr"`
-			Url  string `xml:",chardata"`
+			URL  string `xml:",chardata"`
 		} `xml:"image"`
 	} `xml:"trackmatches>track"`
 }
 
 //track.unlove (empty)
 
-//track.updateNowPlaying
+// TrackUpdateNowPlaying <- track.updateNowPlaying
 type TrackUpdateNowPlaying struct {
 	XMLName xml.Name `xml:"nowplaying"`
 	Track   struct {
